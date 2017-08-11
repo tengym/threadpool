@@ -4,6 +4,8 @@ extern "C"{
 
 #include "threadpool.h"
 
+#define MAX_THREADPOOL_NUM      (30)
+
 struct job
 {
     EPOLL_EV_CB callback;
@@ -27,8 +29,14 @@ typedef struct threadpool
     int pool_close;                   
 }THREAD_POOL_S;
 
-static int g_bthreadpool_init = 0;
-static THREAD_POOL_S *gst_pthreadpool = NULL;
+typedef struct
+{
+    int used_flag;
+    THREAD_POOL_S *pthreadpool;
+}Thread_Param_t;
+
+static int init_flag  = 0;
+static Thread_Param_t gst_threadpool[MAX_THREADPOOL_NUM];
 
 THREAD_POOL_S* threadpool_init(int thread_num, int queue_max_num);
 int threadpool_add_job(struct threadpool *pool, EPOLL_EV_CB callback, void *arg);
@@ -105,11 +113,13 @@ int threadpool_add_job(struct threadpool* pool, EPOLL_EV_CB callback, void *arg)
     {
         pthread_cond_wait(&(pool->queue_not_full), &(pool->mutex));   //队列满的时候就等待
     }
+
     if (pool->queue_close || pool->pool_close)    //队列关闭或者线程池关闭就退出
     {
         pthread_mutex_unlock(&(pool->mutex));
         return -1;
     }
+
     struct job *pjob =(struct job*) malloc(sizeof(struct job));
     if (NULL == pjob)
     {
@@ -148,11 +158,13 @@ void* threadpool_function(void* arg)
         {
             pthread_cond_wait(&(pool->queue_not_empty), &(pool->mutex));
         }
+
         if (pool->pool_close)   //线程池关闭，线程就退出
         {
             pthread_mutex_unlock(&(pool->mutex));
             pthread_exit(NULL);
         }
+
         pool->queue_cur_num--;
         pjob = pool->head;
         if (pool->queue_cur_num == 0)
@@ -163,14 +175,17 @@ void* threadpool_function(void* arg)
         {
             pool->head = pjob->next;
         }
+		
         if (pool->queue_cur_num == 0)
         {
             pthread_cond_signal(&(pool->queue_empty));        //队列为空，就可以通知threadpool_destroy函数，销毁线程函数
         }
+
         if (pool->queue_cur_num < pool->queue_max_num)
         {
             pthread_cond_broadcast(&(pool->queue_not_full));  //队列非满，就可以通知threadpool_add_job函数，添加新任务
         }
+
         pthread_mutex_unlock(&(pool->mutex));
         
         pjob->callback(pjob->arg);   //线程真正要做的工作，回调函数的调用
@@ -226,42 +241,76 @@ int threadpool_destroy(struct threadpool *pool)
     return 0;
 }
 
-int threadpool_api_create(int thread_num)
+int threadpool_get_handle(void)
 {
-	if(1 == g_bthreadpool_init)
-	{
-		return NULL;
-	}
-	
-	gst_pthreadpool = threadpool_init(thread_num, 10);
-	if(NULL == gst_pthreadpool)
+    int i = 0;
+    int ret = 0;
+
+    for(i = 0; i < MAX_THREADPOOL_NUM; i++)
+    {
+        if(0 == gst_threadpool[i].used_flag)
+        {
+            ret = i;
+            break;
+        }
+    }
+    if(i == MAX_THREADPOOL_NUM)
+    {
+        ret = -1;
+    }
+    
+    return ret;
+}
+
+int threadpool_api_create(int thread_num, int *handle)
+{
+    int ret = -1;
+
+    if(NULL == handle)
+    {
+        return -1;
+    }
+
+    if(init_flag == 0)
+    {
+        init_flag = 1;
+        memset(&gst_threadpool, 0, sizeof(gst_threadpool));
+    }
+
+    ret = threadpool_get_handle();
+    if(ret < 0)
+    {
+        return -1;
+    }
+
+    int queue_max_num = thread_num; /*10*/
+	gst_threadpool[ret].pthreadpool = threadpool_init(thread_num, queue_max_num);
+	if(NULL == gst_threadpool[ret].pthreadpool)
 	{
 		return -1;
 	}
 
-	g_bthreadpool_init = 1;
+	gst_threadpool[ret].used_flag = 1;
+
+    *handle = ret;
 	
 	return 0;
 }
 
-int threadpool_api_addtask(EPOLL_EV_CB callback, void *arg)
+int threadpool_api_addtask(int handle, EPOLL_EV_CB callback, void *arg)
 {
-	return threadpool_add_job(gst_pthreadpool, callback, arg);
+	return threadpool_add_job(gst_threadpool[handle].pthreadpool, callback, arg);
 }
 
-int threadpool_api_destory(void)
+int threadpool_api_destory(int handle)
 {
-	if(0 == g_bthreadpool_init)
-	{
-		return 0;
-	}
+	threadpool_destroy(gst_threadpool[handle].pthreadpool);
 
-	threadpool_destroy(gst_pthreadpool);
-
-	g_bthreadpool_init = 0;
+	gst_threadpool[handle].used_flag = 0;
 	
 	return 0;
 } 
+
 #ifdef __cplusplus
 }
 #endif /* __cplusplus */

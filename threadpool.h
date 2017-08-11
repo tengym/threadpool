@@ -23,9 +23,9 @@ extern "C"{
 
 typedef int (*EPOLL_EV_CB)(void *arg);
 
-int threadpool_api_create(int thread_num);
-int threadpool_api_destory(void);
-int threadpool_api_addtask(EPOLL_EV_CB callback, void *arg);
+int threadpool_api_create(int thread_num, int *handle);
+int threadpool_api_addtask(int handle, EPOLL_EV_CB callback, void *arg);
+int threadpool_api_destory(int handle);
 
 
 #ifdef __cplusplus

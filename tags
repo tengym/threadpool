@@ -1,0 +1,61 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.5	//
+AR	Makefile	/^AR =arm-hisiv200-linux-ar$/;"	m
+CC	Makefile	/^CC =arm-hisiv200-linux-gcc $/;"	m
+EPOLL_EV_CB	threadpool.h	/^typedef int (*EPOLL_EV_CB)(void *arg);$/;"	t
+OBJECTS	Makefile	/^OBJECTS	= $(SOURCES:%.c=%.o)$/;"	m
+SOURCES	Makefile	/^SOURCES=$(foreach SUBDIR,.\/,$(wildcard $(SUBDIR)\/*.c))$/;"	m
+THREAD_POOL_S	threadpool.c	/^}THREAD_POOL_S;$/;"	t	file:
+__THREADPOOL_H__	threadpool.h	2;"	d
+arg	threadpool.c	/^    void *arg;                            $/;"	m	struct:job	file:	access:public
+callback	threadpool.c	/^    EPOLL_EV_CB callback;$/;"	m	struct:job	file:	access:public
+g_bthreadpool_init	threadpool.c	/^static int g_bthreadpool_init = 0;$/;"	v	file:
+gst_pthreadpool	threadpool.c	/^static THREAD_POOL_S *gst_pthreadpool = NULL;$/;"	v	file:
+head	threadpool.c	/^    struct job *head;                $/;"	m	struct:threadpool	file:	access:public
+job	threadpool.c	/^struct job$/;"	s	file:
+job::arg	threadpool.c	/^    void *arg;                            $/;"	m	struct:job	file:	access:public
+job::callback	threadpool.c	/^    EPOLL_EV_CB callback;$/;"	m	struct:job	file:	access:public
+job::next	threadpool.c	/^    struct job *next;$/;"	m	struct:job	file:	access:public
+mutex	threadpool.c	/^    pthread_mutex_t mutex;           $/;"	m	struct:threadpool	file:	access:public
+next	threadpool.c	/^    struct job *next;$/;"	m	struct:job	file:	access:public
+pool_close	threadpool.c	/^    int pool_close;                   $/;"	m	struct:threadpool	file:	access:public
+pthreads	threadpool.c	/^    pthread_t *pthreads;            $/;"	m	struct:threadpool	file:	access:public
+queue_close	threadpool.c	/^    int queue_close;                  $/;"	m	struct:threadpool	file:	access:public
+queue_cur_num	threadpool.c	/^    int queue_cur_num;                $/;"	m	struct:threadpool	file:	access:public
+queue_empty	threadpool.c	/^    pthread_cond_t queue_empty;      $/;"	m	struct:threadpool	file:	access:public
+queue_max_num	threadpool.c	/^    int queue_max_num;                $/;"	m	struct:threadpool	file:	access:public
+queue_not_empty	threadpool.c	/^    pthread_cond_t queue_not_empty;   $/;"	m	struct:threadpool	file:	access:public
+queue_not_full	threadpool.c	/^    pthread_cond_t queue_not_full;    $/;"	m	struct:threadpool	file:	access:public
+tail	threadpool.c	/^    struct job *tail;          $/;"	m	struct:threadpool	file:	access:public
+thread_num	threadpool.c	/^    int thread_num;                  $/;"	m	struct:threadpool	file:	access:public
+threadpool	threadpool.c	/^typedef struct threadpool$/;"	s	file:
+threadpool::head	threadpool.c	/^    struct job *head;                $/;"	m	struct:threadpool	file:	access:public
+threadpool::mutex	threadpool.c	/^    pthread_mutex_t mutex;           $/;"	m	struct:threadpool	file:	access:public
+threadpool::pool_close	threadpool.c	/^    int pool_close;                   $/;"	m	struct:threadpool	file:	access:public
+threadpool::pthreads	threadpool.c	/^    pthread_t *pthreads;            $/;"	m	struct:threadpool	file:	access:public
+threadpool::queue_close	threadpool.c	/^    int queue_close;                  $/;"	m	struct:threadpool	file:	access:public
+threadpool::queue_cur_num	threadpool.c	/^    int queue_cur_num;                $/;"	m	struct:threadpool	file:	access:public
+threadpool::queue_empty	threadpool.c	/^    pthread_cond_t queue_empty;      $/;"	m	struct:threadpool	file:	access:public
+threadpool::queue_max_num	threadpool.c	/^    int queue_max_num;                $/;"	m	struct:threadpool	file:	access:public
+threadpool::queue_not_empty	threadpool.c	/^    pthread_cond_t queue_not_empty;   $/;"	m	struct:threadpool	file:	access:public
+threadpool::queue_not_full	threadpool.c	/^    pthread_cond_t queue_not_full;    $/;"	m	struct:threadpool	file:	access:public
+threadpool::tail	threadpool.c	/^    struct job *tail;          $/;"	m	struct:threadpool	file:	access:public
+threadpool::thread_num	threadpool.c	/^    int thread_num;                  $/;"	m	struct:threadpool	file:	access:public
+threadpool_add_job	threadpool.c	/^int threadpool_add_job(struct threadpool *pool, EPOLL_EV_CB callback, void *arg);$/;"	p	file:	signature:(struct threadpool *pool, EPOLL_EV_CB callback, void *arg)
+threadpool_add_job	threadpool.c	/^int threadpool_add_job(struct threadpool* pool, EPOLL_EV_CB callback, void *arg)$/;"	f	signature:(struct threadpool* pool, EPOLL_EV_CB callback, void *arg)
+threadpool_api_addtask	threadpool.c	/^int threadpool_api_addtask(EPOLL_EV_CB callback, void *arg)$/;"	f	signature:(EPOLL_EV_CB callback, void *arg)
+threadpool_api_addtask	threadpool.h	/^int threadpool_api_addtask(EPOLL_EV_CB callback, void *arg);$/;"	p	signature:(EPOLL_EV_CB callback, void *arg)
+threadpool_api_create	threadpool.c	/^int threadpool_api_create(int thread_num)$/;"	f	signature:(int thread_num)
+threadpool_api_create	threadpool.h	/^int threadpool_api_create(int thread_num);$/;"	p	signature:(int thread_num)
+threadpool_api_destory	threadpool.c	/^int threadpool_api_destory(void)$/;"	f	signature:(void)
+threadpool_api_destory	threadpool.h	/^int threadpool_api_destory(void);$/;"	p	signature:(void)
+threadpool_destroy	threadpool.c	/^int threadpool_destroy(struct threadpool *pool)$/;"	f	signature:(struct threadpool *pool)
+threadpool_destroy	threadpool.c	/^int threadpool_destroy(struct threadpool *pool);$/;"	p	file:	signature:(struct threadpool *pool)
+threadpool_function	threadpool.c	/^void* threadpool_function(void* arg)$/;"	f	signature:(void* arg)
+threadpool_function	threadpool.c	/^void* threadpool_function(void* arg);$/;"	p	file:	signature:(void* arg)
+threadpool_init	threadpool.c	/^THREAD_POOL_S* threadpool_init(int thread_num, int queue_max_num);$/;"	p	file:	signature:(int thread_num, int queue_max_num)
+threadpool_init	threadpool.c	/^struct threadpool* threadpool_init(int thread_num, int queue_max_num)$/;"	f	signature:(int thread_num, int queue_max_num)

@@ -1,0 +1,1133 @@
+cscope 15 $HOME/linux-conf/test_dir/threadpool/threadpool -q 0000000071 0000005918
+	@threadpool.c
+
+1 #ifde‡
+__˝lu•lus
+
+
+5 
+	~"thªadpoﬁ.h
+"
+
+7 
+	sjob
+
+
+9 
+EPOLL_EV_CB
+ 
+ˇŒback
+;
+
+10 *
+¨g
+;
+
+11 
+job
+ *
+√xt
+;
+
+14 
+	sthªadpoﬁ
+
+
+16 
+thªad_num
+;
+
+17 
+queue_max_num
+;
+
+18 
+job
+ *
+hód
+;
+
+19 
+job
+ *
+èû
+;
+
+20 
+±hªad_t
+ *
+±hªads
+;
+
+21 
+±hªad_muãx_t
+ 
+muãx
+;
+
+22 
+±hªad_c⁄d_t
+ 
+queue_em±y
+;
+
+23 
+±hªad_c⁄d_t
+ 
+queue_nŸ_em±y
+;
+
+24 
+±hªad_c⁄d_t
+ 
+queue_nŸ_fuŒ
+;
+
+25 
+queue_cur_num
+;
+
+26 
+queue_˛o£
+;
+
+27 
+poﬁ_˛o£
+;
+
+28 }
+	tTHREAD_POOL_S
+;
+
+30 
+g_bthªadpoﬁ_öô
+ = 0;
+
+31 
+THREAD_POOL_S
+ *
+g°_±hªadpoﬁ
+ = 
+NULL
+;
+
+33 
+THREAD_POOL_S
+* 
+thªadpoﬁ_öô
+(
+thªad_num
+, 
+queue_max_num
+);
+
+34 
+thªadpoﬁ_add_job
+(
+thªadpoﬁ
+ *
+poﬁ
+, 
+EPOLL_EV_CB
+ 
+ˇŒback
+, *
+¨g
+);
+
+35 
+thªadpoﬁ_de°roy
+(
+thªadpoﬁ
+ *
+poﬁ
+);
+
+36 * 
+thªadpoﬁ_fun˘i⁄
+(* 
+¨g
+);
+
+38 
+thªadpoﬁ
+* 
+thªadpoﬁ_öô
+(
+thªad_num
+, 
+queue_max_num
+)
+
+40 
+thªadpoﬁ
+ *
+poﬁ
+ = 
+NULL
+;
+
+43 
+poﬁ
+ = (
+thªadpoﬁ
+ *)
+mÆloc
+((threadpool));
+
+44 i‡(
+NULL
+ =
+poﬁ
+)
+
+46 
+¥ötf
+("failedÅo mallocÅhreadpool!\n");
+
+49 
+mem£t
+(
+poﬁ
+, 0, (
+thªadpoﬁ
+));
+
+50 
+poﬁ
+->
+thªad_num
+ =Åhread_num;
+
+51 
+poﬁ
+->
+queue_max_num
+ = queue_max_num;
+
+52 
+poﬁ
+->
+queue_cur_num
+ = 0;
+
+53 
+poﬁ
+->
+hód
+ = 
+NULL
+;
+
+54 
+poﬁ
+->
+èû
+ = 
+NULL
+;
+
+55 i‡(
+±hªad_muãx_öô
+(&(
+poﬁ
+->
+muãx
+), 
+NULL
+))
+
+57 
+¥ötf
+("failedÅo init mutex!\n");
+
+60 i‡(
+±hªad_c⁄d_öô
+(&(
+poﬁ
+->
+queue_em±y
+), 
+NULL
+))
+
+62 
+¥ötf
+("failedÅo init queue_empty!\n");
+
+65 i‡(
+±hªad_c⁄d_öô
+(&(
+poﬁ
+->
+queue_nŸ_em±y
+), 
+NULL
+))
+
+67 
+¥ötf
+("failedÅo init queue_not_empty!\n");
+
+70 i‡(
+±hªad_c⁄d_öô
+(&(
+poﬁ
+->
+queue_nŸ_fuŒ
+), 
+NULL
+))
+
+72 
+¥ötf
+("failedÅo init queue_not_full!\n");
+
+75 
+poﬁ
+->
+±hªads
+ = (
+±hªad_t
+ *)
+mÆloc
+(’thªad_tË* 
+thªad_num
+);
+
+76 i‡(
+NULL
+ =
+poﬁ
+->
+±hªads
+)
+
+78 
+¥ötf
+("failedÅo mallocÖthreads!\n");
+
+81 
+mem£t
+(
+poﬁ
+->
+±hªads
+, 0, (
+±hªad_t
+Ë* 
+thªad_num
+);
+
+83 
+poﬁ
+->
+queue_˛o£
+ = 0;
+
+84 
+poﬁ
+->
+poﬁ_˛o£
+ = 0;
+
+85 
+i
+;
+
+86 
+i
+ = 0; i < 
+poﬁ
+->
+thªad_num
+; ++i)
+
+88 
+±hªad_¸óã
+(&(
+poﬁ
+->
+±hªads
+[
+i
+]), 
+NULL
+, 
+thªadpoﬁ_fun˘i⁄
+, (*)pool);
+
+91  
+poﬁ
+;
+
+94  
+NULL
+;
+
+97 
+thªadpoﬁ_add_job
+(
+thªadpoﬁ
+* 
+poﬁ
+, 
+EPOLL_EV_CB
+ 
+ˇŒback
+, *
+¨g
+)
+
+99 
+as£π
+(
+poﬁ
+ !
+NULL
+);
+
+100 
+as£π
+(
+ˇŒback
+ !
+NULL
+);
+
+101 
+as£π
+(
+¨g
+ !
+NULL
+);
+
+103 
+±hªad_muãx_lock
+(&(
+poﬁ
+->
+muãx
+));
+
+104 (
+poﬁ
+->
+queue_cur_num
+ >poﬁ->
+queue_max_num
+Ë&& !’oﬁ->
+queue_˛o£
+ ||Öoﬁ->
+poﬁ_˛o£
+))
+
+106 
+±hªad_c⁄d_waô
+(&(
+poﬁ
+->
+queue_nŸ_fuŒ
+), &’oﬁ->
+muãx
+));
+
+108 i‡(
+poﬁ
+->
+queue_˛o£
+ ||Öoﬁ->
+poﬁ_˛o£
+)
+
+110 
+±hªad_muãx_u∆ock
+(&(
+poﬁ
+->
+muãx
+));
+
+113 
+job
+ *
+pjob
+ =(job*Ë
+mÆloc
+((job));
+
+114 i‡(
+NULL
+ =
+pjob
+)
+
+116 
+±hªad_muãx_u∆ock
+(&(
+poﬁ
+->
+muãx
+));
+
+119 
+mem£t
+(
+pjob
+, 0, (
+job
+));
+
+120 
+pjob
+->
+ˇŒback
+ = callback;
+
+121 
+pjob
+->
+¨g
+ =árg;
+
+122 
+pjob
+->
+√xt
+ = 
+NULL
+;
+
+123 i‡(
+poﬁ
+->
+hód
+ =
+NULL
+)
+
+125 
+poﬁ
+->
+hód
+ =Öoﬁ->
+èû
+ = 
+pjob
+;
+
+126 
+±hªad_c⁄d_brﬂdˇ°
+(&(
+poﬁ
+->
+queue_nŸ_em±y
+));
+
+130 
+poﬁ
+->
+èû
+->
+√xt
+ = 
+pjob
+;
+
+131 
+poﬁ
+->
+èû
+ = 
+pjob
+;
+
+133 
+poﬁ
+->
+queue_cur_num
+++;
+
+134 
+±hªad_muãx_u∆ock
+(&(
+poﬁ
+->
+muãx
+));
+
+139 * 
+thªadpoﬁ_fun˘i⁄
+(* 
+¨g
+)
+
+141 
+thªadpoﬁ
+ *
+poﬁ
+ = (thªadpoﬁ*)
+¨g
+;
+
+142 
+job
+ *
+pjob
+ = 
+NULL
+;
+
+146 
+±hªad_muãx_lock
+(&(
+poﬁ
+->
+muãx
+));
+
+147 (
+poﬁ
+->
+queue_cur_num
+ =0Ë&& !poﬁ->
+poﬁ_˛o£
+)
+
+149 
+±hªad_c⁄d_waô
+(&(
+poﬁ
+->
+queue_nŸ_em±y
+), &’oﬁ->
+muãx
+));
+
+151 i‡(
+poﬁ
+->
+poﬁ_˛o£
+)
+
+153 
+±hªad_muãx_u∆ock
+(&(
+poﬁ
+->
+muãx
+));
+
+154 
+±hªad_exô
+(
+NULL
+);
+
+156 
+poﬁ
+->
+queue_cur_num
+--;
+
+157 
+pjob
+ = 
+poﬁ
+->
+hód
+;
+
+158 i‡(
+poﬁ
+->
+queue_cur_num
+ == 0)
+
+160 
+poﬁ
+->
+hód
+ =Öoﬁ->
+èû
+ = 
+NULL
+;
+
+164 
+poﬁ
+->
+hód
+ = 
+pjob
+->
+√xt
+;
+
+166 i‡(
+poﬁ
+->
+queue_cur_num
+ == 0)
+
+168 
+±hªad_c⁄d_sig«l
+(&(
+poﬁ
+->
+queue_em±y
+));
+
+170 i‡(
+poﬁ
+->
+queue_cur_num
+ <Öoﬁ->
+queue_max_num
+)
+
+172 
+±hªad_c⁄d_brﬂdˇ°
+(&(
+poﬁ
+->
+queue_nŸ_fuŒ
+));
+
+174 
+±hªad_muãx_u∆ock
+(&(
+poﬁ
+->
+muãx
+));
+
+176 
+pjob
+->
+ˇŒback
+’job->
+¨g
+);
+
+177 
+‰ì
+(
+pjob
+);
+
+178 
+pjob
+ = 
+NULL
+;
+
+182 
+thªadpoﬁ_de°roy
+(
+thªadpoﬁ
+ *
+poﬁ
+)
+
+184 
+as£π
+(
+poﬁ
+ !
+NULL
+);
+
+186 
+±hªad_muãx_lock
+(&(
+poﬁ
+->
+muãx
+));
+
+187 i‡(
+poﬁ
+->
+queue_˛o£
+ ||Öoﬁ->
+poﬁ_˛o£
+)
+
+189 
+±hªad_muãx_u∆ock
+(&(
+poﬁ
+->
+muãx
+));
+
+193 
+poﬁ
+->
+queue_˛o£
+ = 1;
+
+194 
+poﬁ
+->
+queue_cur_num
+ != 0)
+
+196 
+±hªad_c⁄d_waô
+(&(
+poﬁ
+->
+queue_em±y
+), &’oﬁ->
+muãx
+));
+
+199 
+poﬁ
+->
+poﬁ_˛o£
+ = 1;
+
+200 
+±hªad_muãx_u∆ock
+(&(
+poﬁ
+->
+muãx
+));
+
+201 
+±hªad_c⁄d_brﬂdˇ°
+(&(
+poﬁ
+->
+queue_nŸ_em±y
+));
+
+202 
+±hªad_c⁄d_brﬂdˇ°
+(&(
+poﬁ
+->
+queue_nŸ_fuŒ
+));
+
+203 
+i
+;
+
+204 
+i
+ = 0; i < 
+poﬁ
+->
+thªad_num
+; ++i)
+
+206 
+±hªad_joö
+(
+poﬁ
+->
+±hªads
+[
+i
+], 
+NULL
+);
+
+209 
+±hªad_muãx_de°roy
+(&(
+poﬁ
+->
+muãx
+));
+
+210 
+±hªad_c⁄d_de°roy
+(&(
+poﬁ
+->
+queue_em±y
+));
+
+211 
+±hªad_c⁄d_de°roy
+(&(
+poﬁ
+->
+queue_nŸ_em±y
+));
+
+212 
+±hªad_c⁄d_de°roy
+(&(
+poﬁ
+->
+queue_nŸ_fuŒ
+));
+
+213 
+‰ì
+(
+poﬁ
+->
+±hªads
+);
+
+214 
+poﬁ
+->
+±hªads
+ = 
+NULL
+;
+
+215 
+job
+ *
+p
+;
+
+216 
+poﬁ
+->
+hód
+ !
+NULL
+)
+
+218 
+p
+ = 
+poﬁ
+->
+hód
+;
+
+219 
+poﬁ
+->
+hód
+ = 
+p
+->
+√xt
+;
+
+220 
+‰ì
+(
+p
+);
+
+221 
+p
+ = 
+NULL
+;
+
+223 
+‰ì
+(
+poﬁ
+);
+
+224 
+poﬁ
+ = 
+NULL
+;
+
+229 
+thªadpoﬁ_≠i_¸óã
+(
+thªad_num
+)
+
+231 if(1 =
+g_bthªadpoﬁ_öô
+)
+
+233  
+NULL
+;
+
+236 
+g°_±hªadpoﬁ
+ = 
+thªadpoﬁ_öô
+(
+thªad_num
+, 10);
+
+237 if(
+NULL
+ =
+g°_±hªadpoﬁ
+)
+
+242 
+g_bthªadpoﬁ_öô
+ = 1;
+
+247 
+thªadpoﬁ_≠i_addèsk
+(
+EPOLL_EV_CB
+ 
+ˇŒback
+, *
+¨g
+)
+
+249  
+thªadpoﬁ_add_job
+(
+g°_±hªadpoﬁ
+, 
+ˇŒback
+, 
+¨g
+);
+
+252 
+thªadpoﬁ_≠i_de°‹y
+()
+
+254 if(0 =
+g_bthªadpoﬁ_öô
+)
+
+259 
+thªadpoﬁ_de°roy
+(
+g°_±hªadpoﬁ
+);
+
+261 
+g_bthªadpoﬁ_öô
+ = 0;
+
+265 #ifde‡
+__˝lu•lus
+
+
+	@threadpool.h
+
+1 #i‚de‡
+__THREADPOOL_H__
+
+
+2 
+	#__THREADPOOL_H__
+
+
+	)
+
+4 #ifde‡
+__˝lu•lus
+
+
+8 
+	~<time.h
+>
+
+9 
+	~<°dio.h
+>
+
+10 
+	~<sig«l.h
+>
+
+11 
+	~<f˙é.h
+>
+
+12 
+	~<°dlib.h
+>
+
+13 
+	~<uni°d.h
+>
+
+14 
+	~<°rög.h
+>
+
+15 
+	~<î∫o.h
+>
+
+16 
+	~<sys/sockë.h
+>
+
+17 
+	~<√töë/ö.h
+>
+
+18 
+	~<±hªad.h
+>
+
+19 
+	~<¨∑/öë.h
+>
+
+20 
+	~<sys/ïﬁl.h
+>
+
+21 
+	~<sys/ty≥s.h
+>
+
+22 
+	~<as£π.h
+>
+
+24 (*
+EPOLL_EV_CB
+)(*
+	t¨g
+);
+
+26 
+thªadpoﬁ_≠i_¸óã
+(
+thªad_num
+);
+
+27 
+thªadpoﬁ_≠i_de°‹y
+();
+
+28 
+thªadpoﬁ_≠i_addèsk
+(
+EPOLL_EV_CB
+ 
+ˇŒback
+, *
+¨g
+);
+
+31 #ifde‡
+__˝lu•lus
+
+
+	@
+1
+.
+0
+2
+26
+threadpool.c
+threadpool.h
